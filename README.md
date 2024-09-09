@@ -6,3 +6,17 @@ mostrar_ventas este muestra las ventas de todos los departamentos por cada mes d
 Los fui agregando y luego lo multiplique usando los metodos para sacar lo requerrido
 
 Son un poco diferentes en ambos pero en concepto es lo mismo
+
+La sintaxis es diferente
+
+Java:
+
+public static void insertarVentas(Scanner scanner, String departamento) {
+    // código del método
+}
+
+Python:
+
+def insertar_ventas(departamento):
+
+Y así con cada una.
