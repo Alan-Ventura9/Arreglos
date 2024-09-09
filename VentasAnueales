@@ -1,0 +1,74 @@
+import java.util.Scanner;
+
+public class VentasAnuales {
+    static String[] departamentos = {"Ropa", "Deportes", "Juguetería"};
+    static double[][] ventas = new double[3][12];
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        insertarVentas(scanner, "Ropa");
+        insertarVentas(scanner, "Deportes");
+        insertarVentas(scanner, "Juguetería");
+
+        mostrarVentas();
+
+        buscarVenta(scanner, "Ropa", 3);
+        eliminarVentas(scanner, "Deportes"); 
+
+        mostrarVentas();
+    }
+
+    public static void insertarVentas(Scanner scanner, String departamento) {
+        int index = obtenerIndiceDepartamento(departamento);
+        if (index != -1) {
+            System.out.println("Inserte las ventas para el departamento de " + departamento + ":");
+            for (int i = 0; i < 12; i++) {
+                System.out.print("Mes " + (i + 1) + ": ");
+                ventas[index][i] = scanner.nextDouble();
+            }
+        } else {
+            System.out.println("Departamento no encontrado.");
+        }
+    }
+
+    public static void buscarVenta(Scanner scanner, String departamento, int mes) {
+        int index = obtenerIndiceDepartamento(departamento);
+        if (index != -1 && mes >= 1 && mes <= 12) {
+            System.out.println("Ventas del departamento de " + departamento + " en el mes " + mes + ": " + ventas[index][mes - 1]);
+        } else {
+            System.out.println("Departamento o mes inválido.");
+        }
+    }
+
+    public static void eliminarVentas(Scanner scanner, String departamento) {
+        int index = obtenerIndiceDepartamento(departamento);
+        if (index != -1) {
+            for (int i = 0; i < 12; i++) {
+                ventas[index][i] = 0;
+            }
+            System.out.println("Ventas del departamento de " + departamento + " han sido eliminadas.");
+        } else {
+            System.out.println("Departamento no encontrado.");
+        }
+    }
+
+    private static int obtenerIndiceDepartamento(String departamento) {
+        for (int i = 0; i < departamentos.length; i++) {
+            if (departamentos[i].equalsIgnoreCase(departamento)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static void mostrarVentas() {
+        for (int i = 0; i < departamentos.length; i++) {
+            System.out.println("Ventas del departamento de " + departamentos[i] + ":");
+            for (int j = 0; j < 12; j++) {
+                System.out.println("Mes " + (j + 1) + ": " + ventas[i][j]);
+            }
+            System.out.println();
+        }
+    }
+}
